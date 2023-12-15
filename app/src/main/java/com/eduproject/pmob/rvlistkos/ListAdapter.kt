@@ -8,14 +8,16 @@ import com.eduproject.pmob.databinding.ItemlistBinding
 
 class ListAdapter(
     private val list: List<MainEntity>,
-    private val onItemClick: (MainEntity) ->Unit
+    private val onItemClick: (MainEntity) ->Unit,
+    private val onPhoneClick: (MainEntity) ->Unit
 ): RecyclerView.Adapter<ListViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
        return ListViewHolder(
            ItemlistBinding.inflate(
                LayoutInflater.from(parent.context), parent, false
            ),
-           onItemClick
+           onItemClick,
+           onPhoneClick
        )
     }
 

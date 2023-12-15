@@ -6,7 +6,8 @@ import com.eduproject.pmob.databinding.ItemlistBinding
 
 class ListViewHolder(
     private val binding: ItemlistBinding,
-    private val onItemClick: (MainEntity) -> Unit
+    private val onItemClick: (MainEntity) -> Unit,
+    private val onPhoneClick: (MainEntity) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(data: MainEntity) {
         binding.name.text = data.name
@@ -17,5 +18,6 @@ class ListViewHolder(
         val imageId = resources.getIdentifier(data.images, "drawable", binding.root.context.packageName)
         binding.PosterIV.setImageResource(imageId)
         binding.maps.setOnClickListener { onItemClick(data) }
+        binding.wa.setOnClickListener { onPhoneClick(data) }
     }
 }
