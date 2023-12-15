@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Pmob</string>
     <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="password_error_message">Password must be more than 8 characters</string>
+    <string name="email_hint">Email</string>
+    <string name="invalid_email_error">Invalid Email</string>
 </resources>

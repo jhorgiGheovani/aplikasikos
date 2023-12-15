@@ -4,18 +4,21 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eduproject.pmob.data.entity.MainEntity
 import com.eduproject.pmob.databinding.ActivityMainBinding
+import com.eduproject.pmob.login.LoginActivity
 import com.eduproject.pmob.maps.MapsActivity
 import com.eduproject.pmob.rvlistkos.ListAdapter
 import java.net.URLEncoder
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MenuItem.OnMenuItemClickListener {
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels {
         ViewModelFactory((application as MyApplication).repository)
@@ -42,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
     private val onPhoneClick: (MainEntity)->Unit= {mainEntity ->
         try {
-            val phoneNumber = "+6283844034043"
+            val phoneNumber = " +6281368323363"
             val message = "Min, ${mainEntity.name} apakah masih ada?"
             val url = "https://api.whatsapp.com/send?phone=$phoneNumber&text=${URLEncoder.encode(message, "UTF-8")}"
             val intent = Intent(Intent.ACTION_VIEW)
@@ -57,6 +60,29 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Error opening WhatsApp", Toast.LENGTH_SHORT).show()
         }
 
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+
+        val logout = menu.findItem(R.id.logout)
+        logout.setOnMenuItemClickListener(this)
+
+        return true
+    }
+
+    override fun onMenuItemClick(p0: MenuItem): Boolean {
+        return when(p0.itemId) {
+            R.id.logout -> {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+                true
+            }
+            else -> true
+        }
 
     }
 }
